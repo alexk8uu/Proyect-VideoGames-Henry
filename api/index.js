@@ -18,11 +18,21 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
-const { conn } = require('./src/db.js');
+const axios  = require('axios');
+const { conn, Genre } = require('./src/db.js');
+const { API_KEY } = process.env;
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(3001, () => {
+  server.listen(3001, async () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
+    const getGenreApi = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`);
+    getGenreApi.data.results.map(async (genre) => {
+      try {
+        await Genre.findOrCreate( { where: { name: genre.name}})
+      } catch (error) {
+        console.log(error)
+      }
+    })
   });
 });

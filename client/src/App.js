@@ -1,12 +1,20 @@
 import React from 'react';
 import './App.css';
+import Home from '../src/componets/Home.jsx';
+import LandingPage from './componets/LandingPage';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-function App() {
+function App() {  
  
   return (
+    <BrowserRouter>
     <div className="App">
-      <h1>Henry Videogames</h1>
+      <Routes>
+        <Route path= '/' element= {<LandingPage/>}/>
+        <Route path= '/home' element= {<Home/>}/>
+      </Routes>
     </div>
+    </BrowserRouter>
   );
 }
 

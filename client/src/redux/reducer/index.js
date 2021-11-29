@@ -8,13 +8,17 @@ const initialState = {
     dbVidegames : []
 };
 
-export default function rootReducer(state = initialState, action ) {
-    if(action.type === GET_ALL_VIDEOGAMES) {
-        console.log(action.payload)
-         return {
-                ...state,
-                videogames: action.payload
-            }
+function rootReducer(state = initialState, action ) {
+
+        switch(action.type) {
+            case GET_ALL_VIDEOGAMES:
+                return {
+                    ...state,
+                    videogames: action.payload
+                }
+            default:
+                return state;               
         }
-    return state;
     }
+
+export default rootReducer;

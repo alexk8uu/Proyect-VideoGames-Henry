@@ -1,10 +1,11 @@
 import Card from "./Card";
+import styles from '../css_modules/CardList.module.css'
 
 
 export default function CardList({games}) {
     return (
         <div>
-            <div>
+            <div className={styles.grid}>
             {
             games.map((e ,index) => {
                 if(e.name !== "VideoGame not found") {
@@ -15,6 +16,7 @@ export default function CardList({games}) {
                         img={e.img}
                         id={e.id}
                         rating={e.rating}
+                        genres={e.genres.map((elem) => elem.name).join(" / ")}
                         />
                     );
                 } else {

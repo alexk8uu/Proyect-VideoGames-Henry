@@ -1,5 +1,5 @@
 import React from "react";  
-
+import styles from "../css_modules/Paginado.module.css"
 
 export default function Paginado ({VideogamesForPage , videogames ,paginado }) {
     const pageNumbers = [];
@@ -9,12 +9,12 @@ export default function Paginado ({VideogamesForPage , videogames ,paginado }) {
     }
 
     return (
-        <nav>
-            <ul className='paginado'>
+        <nav className={styles.paginado}>
+            <ul>
                 {
                     pageNumbers && pageNumbers.map(number => (
                         <li className='number' key={number}>
-                        <a onClick={() => paginado(number)} >{number}</a>
+                        <a onClick={() => paginado(number)}>{number}</a>
                         </li>
                     ))
                 }

@@ -25,7 +25,7 @@ function mapGames(arr) {
             name: g.name,
             img: g.background_image,
             genres: g.genres.map(gen => { return { id: gen.id, name: gen.name}}),
-            rating: g.rating_top,
+            rating: g.rating,
             released: g.released   
         }
     })
@@ -59,7 +59,8 @@ async function getbyId(req,res) {
             genres: game.data.genres.map(gen => { return { id: gen.id, name: gen.name}}),
             description: game.data.description,
             rating: game.data.rating_top,
-            released: game.data.released   
+            released: game.data.released,
+            platforms: game.data.platforms.map(elem => {return  { id: elem.platform.id , name: elem.platform.name}})
         }  
         res.status(200).json(result);
     }

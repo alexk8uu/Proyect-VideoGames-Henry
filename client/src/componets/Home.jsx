@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import CardList from "./CardList.jsx"
-import { getVideogames } from "../redux/actions/index.js";
+import { 
+    getVideogames, 
+    orderByRating, 
+    reset, 
+    filterByOrigen,
+    getGenres,
+    filterByGenres,
+    orderByAlpha
+} from "../redux/actions/index.js";
 import Paginado from './Paginado.jsx';
 /* import { Link } from 'react-router-dom'; */
 
@@ -12,6 +20,7 @@ export default function Home() {
 
     const dispatch = useDispatch();
     const videogames = useSelector((state) => state.videogames)
+    const genres = useSelector((state) => state.genres)
     const [currentPage, setCurrentPage] = useState(1);
     const [VideogamesForPage] = useState(15)
     const indexOfLast = currentPage * VideogamesForPage;
@@ -26,11 +35,36 @@ export default function Home() {
 
     useEffect(() => {
         dispatch(getVideogames())
+        dispatch(getGenres());
     }, [dispatch])
 
     function handleClick(e) {
         e.preventDefault();
         dispatch(getVideogames())
+    }
+
+    function reiniciar() {
+        dispatch(reset())
+    }
+
+    function handleOrderRanking(e) {
+        reiniciar();
+        dispatch(orderByRating(e.target.value))
+    }
+
+    function handleFilterByOrder(e) {
+        reiniciar();
+        dispatch(filterByOrigen(e.target.value))
+    }
+
+    function handleFilterByGenres(e) {
+        reiniciar();
+        dispatch(filterByGenres(e.target.value))
+    }
+    
+    function handleOrderAlpha(e) {
+        reiniciar();
+        dispatch(orderByAlpha(e.target.value))
     }
 
     return (
@@ -40,18 +74,28 @@ export default function Home() {
                 Volver a cargar los videogames
             </button>
             <div>
-                <select>
-                    <option value='Asc'>ASCENDENTE</option>
-                    <option value='Desc'>DESCENDENTE</option>
+                <select onChange={e => handleOrderAlpha(e)}>
+                    <option value='All'>Ordenar A-Z</option>
+                    <option value='Asc'>Ascendente</option>
+                    <option value='Desc'>Descendente</option>
                 </select>
-                <select>
+                <select onChange={e => handleOrderRanking(e)}>
+                    <option value='null'>Select Rating </option>
                     <option value='RtgASC'>Rating ↑ </option>
                     <option value='RtgDESC'>Rating ↓ </option>
                 </select>
-                <select>
+                <select onChange={e => handleFilterByOrder(e)}>
                     <option value={'All'}>Todos</option>
                     <option value={'Created'}>Creados</option>
                     <option value={'Api'}>Existentes</option>
+                </select>
+                <select onChange={e => handleFilterByGenres(e)}>
+                    <option value='All'>Generos</option>
+                    {
+                        genres?.map(elem => {
+                           return  <option key={elem.id} value={elem.name}>{elem.name}</option>
+                        })
+                    }
                 </select>
                 <Paginado
                         VideogamesForPage={VideogamesForPage}

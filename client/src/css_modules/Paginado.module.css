@@ -1,0 +1,21 @@
+.paginado {
+    margin: 20px 0;
+}
+
+.paginado ul{
+    list-style: none;
+    text-align: center;
+}
+
+.paginado ul li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.paginado ul li a {
+    display: block;
+    padding: 10px 20px;
+    color: #fff;
+    background: #161616;
+    text-decoration: none;
+}

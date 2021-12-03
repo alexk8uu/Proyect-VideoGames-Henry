@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     platforms: { 
-      type: DataTypes.ARRAY(DataTypes.JSON),
+      type: DataTypes.ARRAY(DataTypes.TEXT),
       allowNull: false 
     }
   });

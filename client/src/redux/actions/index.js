@@ -2,13 +2,16 @@ import  axios  from 'axios';
 export const GET_ALL_VIDEOGAMES = "GET_ALL_VIDEOGAMES";
 export const GET_DETAILS = "GET_DETAILS";
 export const GET_GENRES = "GET_GENRES";
+export const CREATED_VIDEOGAME = "CREATED_VIDEOGAME";
 export const ORDER_BY_RATING = "ORDER_BY_RATING";
 export const ORDER_BY_ALPHA = "ORDER_BY_ALPHA";
 export const FILTER_BY_GENRES = "FILTER_BY_GENRES";
 export const FILTER_BY_ORIGIN = "FILTER_BY_ORIGIN";
 export const URL_VIDEOGAMES = "http://localhost:3001/videogames";
+export const URL_SEARCH_VIDEOGAME = "http://localhost:3001/videogames?name=";
 export const URL_DETAILS = "http://localhost:3001/videogame"
 export const URL_GENRES = "http://localhost:3001/genre"
+export const URL_CREATE_VIDEOGAME = "http://localhost:3001/videogame"
 export const RESET = "RESET"
 
 
@@ -22,6 +25,20 @@ export function getVideogames() {
             })
         } catch (error) {
             console.log("Error", error)
+        }
+    }
+}
+
+export function createVideogame(payload) {
+    return async function(dispatch) {
+        try {
+            var json = await axios.post(URL_CREATE_VIDEOGAME,payload)
+            return dispatch({
+                type: CREATED_VIDEOGAME,
+                payload: json.data
+            })
+        } catch (error) {
+            console.log("Error",error)
         }
     }
 }
@@ -50,6 +67,20 @@ export function getDetailsByID(id) {
             })
         } catch (error) {
             console.log("Error", error)
+        }
+    }
+}
+
+export function searchGameByName (payload) {
+    return async function(dispatch) {
+        try {
+            const games = await axios.get(`${URL_SEARCH_VIDEOGAME}${payload}`);
+            return dispatch( {
+                type: URL_SEARCH_VIDEOGAME,
+                payload: games.data
+            })
+        } catch (error) {
+            console.log(error)
         }
     }
 }

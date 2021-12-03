@@ -11,8 +11,8 @@ import {
     orderByAlpha
 } from "../redux/actions/index.js";
 import Paginado from './Paginado.jsx';
-/* import { Link } from 'react-router-dom'; */
-
+import SearchBar from './SearchBar.jsx';
+import styles from '../css_modules/Home.module.css';
 
 //pedir los personajes al back
 //escucho y mapeo el estado de los videogames y por cada uno mapeo una Cards
@@ -22,6 +22,7 @@ export default function Home() {
     const videogames = useSelector((state) => state.videogames)
     const genres = useSelector((state) => state.genres)
     const [currentPage, setCurrentPage] = useState(1);
+    const [filter,   setFilter] = useState("");
     const [VideogamesForPage] = useState(15)
     const indexOfLast = currentPage * VideogamesForPage;
     const indexOfFirst = indexOfLast - VideogamesForPage;
@@ -48,12 +49,14 @@ export default function Home() {
     }
 
     function handleOrderRanking(e) {
-        reiniciar();
+        e.preventDefault()
+        setFilter('filter' + e.target.value)
         dispatch(orderByRating(e.target.value))
     }
 
     function handleFilterByOrder(e) {
-        reiniciar();
+        e.preventDefault();
+        setFilter('Filter' + e.target.value)
         dispatch(filterByOrigen(e.target.value))
     }
 
@@ -63,12 +66,13 @@ export default function Home() {
     }
     
     function handleOrderAlpha(e) {
-        reiniciar();
+        e.preventDefault()
         dispatch(orderByAlpha(e.target.value))
+        setCurrentPage(1)
     }
 
     return (
-        <div>
+        <div className={styles.container}>
             <h1> VIDEOGAMES </h1>
             <button onClick={e => { handleClick(e) }}>
                 Volver a cargar los videogames
@@ -97,6 +101,7 @@ export default function Home() {
                         })
                     }
                 </select>
+                <SearchBar/>
                 <Paginado
                         VideogamesForPage={VideogamesForPage}
                         videogames={videogames.length}

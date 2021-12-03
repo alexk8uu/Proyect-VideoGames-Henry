@@ -26,7 +26,8 @@ function mapGames(arr) {
             img: g.background_image,
             genres: g.genres.map(gen => { return { id: gen.id, name: gen.name}}),
             rating: g.rating,
-            released: g.released   
+            released: g.released  ,
+            platforms: g.platforms.map((elem) => elem.platform.name)
         }
     })
     return data;

@@ -28,11 +28,11 @@ export default function CardDetails() {
                     <div>{details.released}</div>
                     <div>
                         {
-                        details.platforms?.map(elem => <span key={elem.id}>{elem.name}</span>)
+                        details.platforms && details.platforms?.map(elem => <span key={elem.id}>{elem.name}</span>)
                         }
                     </div>
                     {
-                        details.genres?.map(gen => <span key={details.id}>{gen.name} </span>)
+                        details.genres && details.genres?.map(gen => <span key={details.id}>{gen.name} </span>)
                     }
                 </div>
             </div>

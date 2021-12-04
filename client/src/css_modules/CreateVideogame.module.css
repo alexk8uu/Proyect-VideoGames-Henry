@@ -1,0 +1,11 @@
+.container {
+    color: #ffff;
+}
+
+.container .genres {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 300px;
+    margin-right: 300px;
+}
+

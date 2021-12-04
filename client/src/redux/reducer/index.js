@@ -8,7 +8,8 @@ import {
     FILTER_BY_GENRES,
     ORDER_BY_ALPHA,
     URL_SEARCH_VIDEOGAME,
-    CREATED_VIDEOGAME
+    CREATED_VIDEOGAME,
+    GET_PLATFORMS
 } from "../actions/index.js"
 
 import {
@@ -16,14 +17,16 @@ import {
     orderByOrigen,
     orderByGenres,
     orderAlpha,
+    obtainPlatforms,
 } from "../utils/index.js"
 
 const initialState = {
     videogames: [],
     genres: [],
     details: [],
-    dbVidegames: [],
-    reset: []
+    data: "",
+    reset: [],
+    platforms: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -39,6 +42,11 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 videogames: action.payload   
+            }
+        case GET_PLATFORMS:
+            return {
+                ...state,
+                platforms: obtainPlatforms(state.videogames)
             }
         case GET_GENRES:
             return {
@@ -79,13 +87,9 @@ function rootReducer(state = initialState, action) {
                 videogames: orderAlpha( action.payload, state.videogames)
             }
         case FILTER_BY_ORIGIN:
-            if (action.payload === 'All') return {
-                ...state,
-                videogames: state.reset
-            }
             return {
                 ...state,
-                videogames: orderByOrigen(action.payload, state.videogames)
+                data: action.payload
             } 
         case CREATED_VIDEOGAME:
             return {

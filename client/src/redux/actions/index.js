@@ -2,6 +2,7 @@ import  axios  from 'axios';
 export const GET_ALL_VIDEOGAMES = "GET_ALL_VIDEOGAMES";
 export const GET_DETAILS = "GET_DETAILS";
 export const GET_GENRES = "GET_GENRES";
+export const GET_PLATFORMS = "GET_PLATFORMS";
 export const CREATED_VIDEOGAME = "CREATED_VIDEOGAME";
 export const ORDER_BY_RATING = "ORDER_BY_RATING";
 export const ORDER_BY_ALPHA = "ORDER_BY_ALPHA";
@@ -56,6 +57,21 @@ export function getGenres() {
         }
     }
 }
+
+export function getPlataforms() {
+    return async function(dispatch) {
+        try {
+            const json = await axios.get(URL_VIDEOGAMES)
+            return dispatch({
+                type : GET_PLATFORMS,
+                payload: json.data
+            })
+        } catch (error) {
+            console.log("Error", error)
+        }
+    }
+}
+
 
 export function getDetailsByID(id) {
     return async function(dispatch) {

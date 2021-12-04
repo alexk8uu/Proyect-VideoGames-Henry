@@ -14,14 +14,14 @@ export function orderRating(type, games) {
 }
 
 
-export function orderByOrigen (type, games) {
-    const videogames = JSON.parse(JSON.stringify(games));
-    if( type === 'Created') {
-       var filterOrigin = videogames.filter((game) => { return game.id.length > 10 })
-    } else if (type === 'Api'){
-       var filterOrigin = videogames.filter((game) => { return !isNaN(game.id) })
+export function orderByOrigen (type, videogames) {
+    videogames = JSON.parse(JSON.stringify(videogames));
+    if (type === 'Api') {
+        videogames= videogames.filter((game) => {return !isNaN(game.id)} )
+    } else if (type === 'Created') {
+        videogames = videogames.filter((game) => {return isNaN(game.id)})
     }
-    return filterOrigin;
+    return videogames;
 }
 
 export function orderByGenres (type, games) {
@@ -49,4 +49,12 @@ export function orderAlpha (type, games) {
         })
     }
     return filterList;
+}
+
+export function obtainPlatforms(games) {
+    const videogames = JSON.parse(JSON.stringify(games));
+    const allPlataforms = videogames.map(elem => elem.platforms)
+    let platformsSet = new Set(allPlataforms.flat(Infinity))
+    let platforms = [...platformsSet]
+    return platforms;
 }

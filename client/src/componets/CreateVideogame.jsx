@@ -13,7 +13,7 @@ export default function CreateVideogame() {
     const platforms = useSelector((state) => state.platforms);
     
 
-    let [input, setImput] = useState({
+    let [input, setInput] = useState({
         name: "",
         description: "",
         released: "",
@@ -22,6 +22,31 @@ export default function CreateVideogame() {
         platforms: [],
         genres: []
     })
+
+    function handleChange (e) {
+        setInput({
+            ...input,
+            [e.target.name] : [e.target.value]
+        })
+        console.log(input)
+    }
+
+    function handleSelectPlatforms (e) {
+        setInput({
+            ...input,
+            platforms: [...input.platforms, e.target.value]
+        })
+        console.log(input)
+    }
+
+    function handleSelectGenres (e) {
+        setInput({
+            ...input,
+            genres: [...input.genres, e.target.value]
+        })
+        console.log(input)
+    }
+
 
     useEffect(() => {
         dispatch(getVideogames());
@@ -44,6 +69,7 @@ export default function CreateVideogame() {
                         type="text"
                         value={input.name}
                         name="name"
+                        onChange={handleChange}
                     />
                 </div>
                 <div>
@@ -51,6 +77,7 @@ export default function CreateVideogame() {
                     <textarea
                         name="description"
                         value={input.description}
+                        onChange={handleChange}
                     />
                 </div>
                 <div>
@@ -59,6 +86,7 @@ export default function CreateVideogame() {
                         type='Text'
                         name="image"
                         value={input.img}
+                        onChange={handleChange}
                     />
                 </div>
                 <div>
@@ -67,6 +95,7 @@ export default function CreateVideogame() {
                         type="date"
                         name="released"
                         value={input.released}
+                        onChange={handleChange}
                     />
                 </div>
                 <div>
@@ -77,6 +106,7 @@ export default function CreateVideogame() {
                         value={input.rating}
                         min="0"
                         max="5"
+                        onChange={handleChange}
                     />
                 </div>
                 <div>
@@ -84,13 +114,14 @@ export default function CreateVideogame() {
                     <div className={styles.genres}>
                         {
                             genres.map((elem, index) => (
-                                <div key={index} className={styles.checkbox} >
+                                <div key={index} className={styles.genres_checkbox} >
                                     {elem.name}
                                     <input
                                         type="checkbox"
                                         name={elem.name}
                                         value={elem.name}
                                         className={styles.checkbox2}
+                                        onChange={handleSelectGenres}
                                     />
                                 </div>
                             ))
@@ -98,21 +129,22 @@ export default function CreateVideogame() {
                     </div>
                 </div>
                 <div>
-                    {console.log(platforms)}
+
                     <label>Platforms:</label>
-                    <div>
-                     {/*    {
+                    <div className={styles.platforms}>
+                        {
                             platforms.map((elem, index) => (
-                                <div key= {index}>
+                                <div key= {index} className={styles.platforms_checkbox}>
                                     {elem}
                                     <input
                                     type = "checkbox"
                                     name = {elem}
                                     value = {elem}
+                                    onChange={handleSelectPlatforms}
                                     />
                                 </div>
                             ))
-                        } */}
+                        }
                     </div>
                 </div>
             </form>

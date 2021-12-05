@@ -9,3 +9,10 @@
     margin-right: 300px;
 }
 
+.container .platforms {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 300px;
+    margin-right: 300px;
+}
+

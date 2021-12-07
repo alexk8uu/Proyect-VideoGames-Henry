@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { searchGameByName } from "../redux/actions/index.js"
-
+import { BiSearch } from "react-icons/bi"
+import styles from '../css_modules/SearchBar.module.css'
 
 
 export default function SearchBar() {
@@ -22,13 +23,15 @@ export default function SearchBar() {
    
    
     return (
-        <div>
+        <div className={styles.box}>
+            <form>
             <input
             type = 'text'
-            placeholder = 'Buscar...'
+            placeholder = 'Search Game'
             onChange = {(e) => handleImputChange(e) }
             />
-            <button type='submit' onClick={(e) => handleSubmit(e)}>Buscar</button>
+            <button type='submit' onClick={(e) => handleSubmit(e)}>Buscar <BiSearch/></button>
+            </form>
         </div>
     )
 }

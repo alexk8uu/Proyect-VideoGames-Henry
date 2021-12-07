@@ -13,8 +13,23 @@ export const URL_SEARCH_VIDEOGAME = "http://localhost:3001/videogames?name=";
 export const URL_DETAILS = "http://localhost:3001/videogame"
 export const URL_GENRES = "http://localhost:3001/genre"
 export const URL_CREATE_VIDEOGAME = "http://localhost:3001/videogame"
+export const URL_DBGAMES = "http://localhost:3001/db/videogames"
 export const RESET = "RESET"
 
+
+export function getDbGames () {
+    return async function(dispatch) {
+        try {
+            const dbgames = await axios.get(URL_DBGAMES)
+            return dispatch({
+                type: URL_DBGAMES,
+                payload: dbgames.data
+            })
+        } catch (error) {
+            console.log("Error",error)
+        }
+    }
+}
 
 export function getVideogames() {
     return async function(dispatch) {

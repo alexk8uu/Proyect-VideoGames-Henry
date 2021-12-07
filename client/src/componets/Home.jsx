@@ -9,7 +9,8 @@ import {
     getGenres,
     filterByGenres,
     orderByAlpha,
-    getPlataforms
+    getPlataforms,
+    getDbGames
 } from "../redux/actions/index.js";
 import Paginado from './Paginado.jsx';
 import SearchBar from './SearchBar.jsx';
@@ -27,13 +28,14 @@ export default function Home() {
     const genres = useSelector((state) => state.genres)
     const data = useSelector((state) => state.data)
     const [filter, setFilter] = useState("");
+    const dbgames = useSelector((state) => state.dbgames);
 
 
     /* ---- select from DB- API */
 
     let result = videogames;
     if (data === "Created") {
-        result = videogames.filter(e => typeof (e.id) === "string")
+        result = dbgames
     } else if (data === 'Api') {
         result = videogames.filter(e => typeof (e.id) === "number")
     }
@@ -62,6 +64,12 @@ export default function Home() {
 
 
     /* -----------FILTRADOS---------------------- */
+
+    function handleDB(e) {
+        e.preventDefault();
+        dispatch(getDbGames())
+    }
+
 
     function handleClick(e) {
         e.preventDefault();
@@ -104,29 +112,33 @@ export default function Home() {
                 <div>
                     <button onClick={e => { handleClick(e) }}> Volver a cargar los videogames </button>
                 </div>
-                <select onChange={e => handleOrderAlpha(e)}>
-                    <option value='All'>Ordenar A-Z</option>
-                    <option value='Asc'>Ascendente</option>
-                    <option value='Desc'>Descendente</option>
-                </select>
-                <select onChange={e => handleOrderRanking(e)}>
-                    <option value='null'>Select Rating </option>
-                    <option value='RtgASC'>Rating ↑ </option>
-                    <option value='RtgDESC'>Rating ↓ </option>
-                </select>
-                <select onChange={e => handleFilterByOrder(e)}>
-                    <option value={'All'}>Todos</option>
-                    <option value={'Created'}>Creados</option>
-                    <option value={'Api'}>Existentes</option>
-                </select>
-                <select onChange={e => handleFilterByGenres(e)}>
-                    <option value='All'>Generos</option>
-                    {
-                        genres?.map(elem => {
-                            return <option key={elem.id} value={elem.name}>{elem.name}</option>
-                        })
-                    }
-                </select>
+               
+                    <select onChange={e => handleOrderAlpha(e)}>
+                        <option value='All'>Ordenar A-Z</option>
+                        <option value='Asc'>Ascendente</option>
+                        <option value='Desc'>Descendente</option>
+                    </select>
+                    <select onChange={e => handleOrderRanking(e)}>
+                        <option value='null'>Select Rating </option>
+                        <option value='RtgASC'>Rating ↑ </option>
+                        <option value='RtgDESC'>Rating ↓ </option>
+                    </select>
+                    <select onChange={e => handleFilterByOrder(e)}>
+                        <option value={'All'}>Todos</option>
+                        <option value={'Created'}>Creados</option>
+                        <option value={'Api'}>Existentes</option>
+                    </select>
+                    <select onChange={e => handleFilterByGenres(e)}>
+                        <option value='All'>Generos</option>
+                        {
+                            genres?.map(elem => {
+                                return <option key={elem.id} value={elem.name}>{elem.name}</option>
+                            })
+                        }
+                    </select>
+          
+
+                <div><button onClick={e => handleDB(e)}>DATABASE</button></div>
                 <div>
                     <Link to='/create'><button>CREATE VIDEOGAME</button></Link>
                 </div>

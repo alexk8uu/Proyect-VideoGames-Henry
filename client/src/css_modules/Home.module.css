@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap');
+
+
+
 .container h1 {
     position: absolute;
     top: 0px;
@@ -34,3 +38,35 @@
     position: relative;
     top: 200px;
 }
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0;
+    flex: 1;
+    padding: 0 .5em;
+    color: #131112;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.container select {
+    position: relative;
+    text-align: center;
+    right: 250px;
+    width: 120px;
+    height: 40px;
+   
+    background: #2EE59D;
+    overflow: hidden;
+    border-radius: .25em;
+    margin: 4px;
+    font-size: 15px;
+}   
+
+

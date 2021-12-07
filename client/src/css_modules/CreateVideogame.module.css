@@ -16,3 +16,8 @@
     margin-right: 300px;
 }
 
+
+.error {
+    display:inline;
+    margin-left: 10px;
+}

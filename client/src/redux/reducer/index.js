@@ -9,7 +9,8 @@ import {
     ORDER_BY_ALPHA,
     URL_SEARCH_VIDEOGAME,
     CREATED_VIDEOGAME,
-    GET_PLATFORMS
+    GET_PLATFORMS,
+    URL_DBGAMES
 } from "../actions/index.js"
 
 import {
@@ -27,6 +28,7 @@ const initialState = {
     data: "",
     reset: [],
     platforms: [],
+    dbgames: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -37,6 +39,11 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 videogames: action.payload,
                 reset: action.payload
+            }
+        case URL_DBGAMES:
+            return {
+                ...state,
+                dbgames: action.payload
             }
         case URL_SEARCH_VIDEOGAME:
             return {

@@ -33,6 +33,13 @@ function mapGames(arr) {
     return data;
 }
 
+async function getDbGames(req,res) {
+    const games = await Videogame.findAll({
+        include: Genre
+    })
+    res.json(games);
+}
+
 async function dbGames() {
     return await Videogame.findAll({
         include: Genre
@@ -101,5 +108,6 @@ module.exports = {
     allGames,
     getbyId,
     getGenres,
-    addVideogame
+    addVideogame,
+    getDbGames
 }

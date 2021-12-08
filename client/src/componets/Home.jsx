@@ -15,8 +15,8 @@ import {
 import Paginado from './Paginado.jsx';
 import SearchBar from './SearchBar.jsx';
 import styles from '../css_modules/Home.module.css';
-/* import VidegameText from './VidegameText.jsx' */
 import { NavLink as Link } from 'react-router-dom';
+import { IoIosRefresh } from "react-icons/io";
 
 
 //pedir los personajes al back
@@ -60,6 +60,7 @@ export default function Home() {
         dispatch(getVideogames());
         dispatch(getGenres());
         dispatch(getPlataforms());
+        dispatch(getDbGames());
     }, [dispatch])
 
 
@@ -110,39 +111,40 @@ export default function Home() {
 
             <div className={styles.nav}>
                 <div>
-                    <button onClick={e => { handleClick(e) }}> Volver a cargar los videogames </button>
+                    <button className={styles.btn_reload}onClick={e => { handleClick(e) }}><IoIosRefresh/></button>
                 </div>
-               
-                    <select onChange={e => handleOrderAlpha(e)}>
-                        <option value='All'>Ordenar A-Z</option>
-                        <option value='Asc'>Ascendente</option>
-                        <option value='Desc'>Descendente</option>
-                    </select>
-                    <select onChange={e => handleOrderRanking(e)}>
-                        <option value='null'>Select Rating </option>
-                        <option value='RtgASC'>Rating ↑ </option>
-                        <option value='RtgDESC'>Rating ↓ </option>
-                    </select>
-                    <select onChange={e => handleFilterByOrder(e)}>
-                        <option value={'All'}>Todos</option>
-                        <option value={'Created'}>Creados</option>
-                        <option value={'Api'}>Existentes</option>
-                    </select>
-                    <select onChange={e => handleFilterByGenres(e)}>
-                        <option value='All'>Generos</option>
-                        {
-                            genres?.map(elem => {
-                                return <option key={elem.id} value={elem.name}>{elem.name}</option>
-                            })
-                        }
-                    </select>
-          
 
-                <div><button onClick={e => handleDB(e)}>DATABASE</button></div>
+                <select onChange={e => handleOrderAlpha(e)}>
+                    <option value='All'>Ordenar A-Z</option>
+                    <option value='Asc'>Ascendente</option>
+                    <option value='Desc'>Descendente</option>
+                </select>
+                <select onChange={e => handleOrderRanking(e)}>
+                    <option value='null'>Select Rating </option>
+                    <option value='RtgASC'>Rating ↑ </option>
+                    <option value='RtgDESC'>Rating ↓ </option>
+                </select>
+                <select onChange={e => handleFilterByOrder(e)}>
+                    <option value={'All'}>Todos</option>
+                    <option value={'Created'}>Creados</option>
+                    <option value={'Api'}>Existentes</option>
+                </select>
+                <select onChange={e => handleFilterByGenres(e)}>
+                    <option value='All'>Generos</option>
+                    {
+                        genres?.map(elem => {
+                            return <option key={elem.id} value={elem.name}>{elem.name}</option>
+                        })
+                    }
+                </select>
+
+
+
                 <div>
-                    <Link to='/create'><button>CREATE VIDEOGAME</button></Link>
+                    <button onClick={e => handleDB(e)} className={styles.btn_database}>DATABASE</button>
+                    <Link to='/create' ><button className={styles.btn_create}>CREATE VIDEOGAME</button></Link>
+                    <SearchBar />
                 </div>
-                <SearchBar />
                 <Paginado
                     VideogamesForPage={VideogamesForPage}
                     videogames={videogames.length}

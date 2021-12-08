@@ -2,9 +2,9 @@
 
 
 .box {
-    position: absolute;
-    top: 14%;
-    left: 55%;
+    position: relative;
+    top: -90px;
+    left:30%;
     width: 500px;
 }
 
@@ -32,4 +32,5 @@
     cursor: pointer;
     background: #2EE59D;
     font-family: 'Poppins', sans-serif;
+    font-weight: 500;
 }

@@ -23,16 +23,26 @@ function validate(input) {
     return error;
 }
 
+// hardcode vars 
 
-
+/* const genres = [{ name: "Action" }, { name: "Adventure" }, { name: "Shooter" }, { name: "RPG" }, { name: "Arcade" }, { name: "Rol" }]
+const platforms = ["Xbox 360", "Play Station 4", "Play Station 5", "Pc", "Wii", "Nintendo"] */
 
 export default function CreateVideogame() {
 
     const dispatch = useDispatch();
     const genres = useSelector((state) => state.genres);
-    const platforms = useSelector((state) => state.platforms);
+    const videogames = useSelector((state) => state.videogames);
+    const allPlatforms = videogames.map((elem) => elem.platforms);
+    let platformsSet = new Set(allPlatforms.flat(Infinity));
+    let platforms = [...platformsSet]
+    /* const platforms = useSelector((state) => state.platforms); */
     const history = useNavigate()
-    const [errors, setErrors ] = useState({});
+    const [errors, setErrors] = useState({});
+    let [checkState, setCheckState] = useState({
+        genres: new Array(genres.length).fill(false),
+        platforms: new Array(platforms.length).fill(false)
+    })
 
     let [input, setInput] = useState({
         name: "",
@@ -54,21 +64,50 @@ export default function CreateVideogame() {
             [e.target.name]: e.target.value
         }))
         console.log(input)
+        console.log(platforms)
+        console.log(checkState.platforms)
     }
 
-    function handleSelectPlatforms(e) {
-        setInput({
-            ...input,
-            platforms: [...input.platforms, e.target.value]
-        })
+    function handleSelectPlatforms(e, pos, elem) {
+        if (!e.target.checked) {
+            let elemDelete = e.target.value;
+            setCheckState({
+                ...checkState,
+                platforms: checkState.platforms.filter(elem => elem !== elemDelete)
+            })
+            setInput({
+                ...input,
+                platforms: input.platforms.filter(elem => elem !== elemDelete)
+            })
+        } else {
+            setCheckState({
+                ...checkState,
+                platforms: [...checkState.platforms, elem]
+            })
+            setInput({
+                ...input,
+                platforms: [...input.platforms, elem]
+            })
+
+        }
         console.log(input)
     }
 
-    function handleSelectGenres(e) {
-        setInput({
-            ...input,
-            genres: [...input.genres, e.target.value]
-        })
+    function handleSelectGenres(pos) {
+        let genCheckState = checkState.genres.map((elem, index) => {
+            if (index === pos) {
+                return !elem
+            }
+            return elem;
+        });
+        setCheckState({ ...checkState, genres: genCheckState })
+        var genArr = genCheckState.map((elem, index) => {
+            if (elem === true) {
+                return genres[index].name
+            }
+            return 0
+        }).filter((elem) => typeof elem === "string")
+        setInput({ ...input, genres: genArr })
         console.log(input)
     }
 
@@ -76,7 +115,7 @@ export default function CreateVideogame() {
         e.preventDefault(e);
         console.log(input);
         dispatch(createVideogame(input));
-        alert('Your Videogame ')
+        alert('Your videogame has been created succesfully')
         setInput({
             name: "",
             description: "",
@@ -100,12 +139,14 @@ export default function CreateVideogame() {
     return (
         <div className={styles.container}>
             <Link to='/home' >
-                <button>Back</button>
+                <button
+                    className={styles.button2}
+                >Back</button>
             </Link>
             <h1>Create your Videogame!</h1>
             <form onSubmit={(e) => handleSubmit(e)}>
-                <div>
-                    <label htmlFor="name">Name:</label>
+                <div className={styles.box}>
+                    <h1 className={styles.inputDetail}>Name</h1>
                     <input
                         id="name"
                         type="text"
@@ -119,22 +160,8 @@ export default function CreateVideogame() {
                         )
                     }
                 </div>
-                <div>
-                    <label htmlFor="description">Description:</label>
-                    <textarea
-                        id="description"
-                        name="description"
-                        value={input.description}
-                        onChange={handleChange}
-                    />
-                     {
-                        errors.description && (
-                            <p className={styles.error}>{errors.description}</p>
-                        )
-                    }
-                </div>
-                <div>
-                    <label htmlFor="img">Imagen:</label>
+                <div className={styles.box}>
+                    <p className={styles.inputDetail} >Imagen</p>
                     <input
                         id="img"
                         type="text"
@@ -143,22 +170,22 @@ export default function CreateVideogame() {
                         onChange={handleChange}
                     />
                 </div>
-                <div>
-                    <label >Released:</label>
+                <div className={styles.box}>
+                    <p className={styles.inputDetail}>Released</p>
                     <input
                         type="date"
                         name="released"
                         value={input.released}
                         onChange={handleChange}
                     />
-                      {
+                    {
                         errors.released && (
                             <p className={styles.error}>{errors.released}</p>
                         )
                     }
                 </div>
-                <div>
-                    <label>Rating:</label>
+                <div className={styles.box}>
+                    <p className={styles.inputDetail}>Rating</p>
                     <input
                         type="number"
                         name="rating"
@@ -168,8 +195,22 @@ export default function CreateVideogame() {
                         onChange={handleChange}
                     />
                 </div>
+                <div className={styles.box}>
+                    <p className={styles.button_text}>Description</p>
+                    <textarea
+                        id="description"
+                        name="description"
+                        value={input.description}
+                        onChange={handleChange}
+                    />
+                    {
+                        errors.description && (
+                            <p className={styles.error}>{errors.description}</p>
+                        )
+                    }
+                </div>
                 <div>
-                    <label>Genres:</label>
+                    <label className={styles.genres_name}>Genres:</label>
                     <div className={styles.genres}>
                         {
                             genres.map((elem, index) => (
@@ -180,17 +221,13 @@ export default function CreateVideogame() {
                                         name={elem.name}
                                         value={elem.name}
                                         className={styles.checkbox2}
-                                        onChange={handleSelectGenres}
+                                        onChange={() => handleSelectGenres(index)}
                                     />
                                 </div>
                             ))
                         }
-                    
                     </div>
-                </div>
-                <div>
-
-                    <label>Platforms:</label>
+                    <label className={styles.platforms_name}>Platforms:</label>
                     <div className={styles.platforms}>
                         {
                             platforms.map((elem, index) => (
@@ -200,14 +237,18 @@ export default function CreateVideogame() {
                                         type="checkbox"
                                         name={elem}
                                         value={elem}
-                                        onChange={handleSelectPlatforms}
+                                        onChange={(e) => handleSelectPlatforms(e, index, elem)}
                                     />
                                 </div>
                             ))
                         }
                     </div>
                     <div>
-                        <button type="submit">
+                        {console.log(errors)}
+                        <button
+                            disabled={errors.name || errors.description || errors.released}
+                            type="submit"
+                            className={errors.name || errors.description || errors.released ? `${styles.btn_disable}` : `${styles.btn}`}>
                             Enter
                         </button>
                     </div>

@@ -15,7 +15,6 @@ import {
 
 import {
     orderRating,
-    orderByOrigen,
     orderByGenres,
     orderAlpha,
     obtainPlatforms,

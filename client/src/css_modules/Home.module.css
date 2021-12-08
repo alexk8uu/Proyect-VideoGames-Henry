@@ -4,7 +4,7 @@
 
 .container h1 {
     position: absolute;
-    top: 0px;
+    top: -30px;
     font-size: 5vw;
     color: #131112;
     -webkit-text-stroke: 0.8px rgba(134, 197, 172, 0.808);
@@ -50,18 +50,18 @@ select {
     flex: 1;
     padding: 0 .5em;
     color: #131112;
+    font-weight: 400;
     cursor: pointer;
-    font-family: 'Poppins', sans-serif;
+    
 }
 
 
 .container select {
     position: relative;
     text-align: center;
-    right: 250px;
+    top: -70px;
     width: 120px;
     height: 40px;
-   
     background: #2EE59D;
     overflow: hidden;
     border-radius: .25em;
@@ -69,4 +69,54 @@ select {
     font-size: 15px;
 }   
 
+.btn_create {
+    position: relative;
+    left: 230px;
+    top: -42px;
+    font-size: 12px;
+    font-weight: 700;
+    margin: 2px;
+    border-radius: 25px;
+    width: 150px;
+    height: 50px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: #2EE59D;
+    
+}
+
+.btn_database {
+    position: relative;
+    right: 280px;
+    top: -42px;
+    font-size: 12px;
+    font-weight: 700;
+    margin: 2px;
+    border-radius: 25px;
+    width: 150px;
+    height: 50px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: #2EE59D;
+   
+}
+
+.btn_reload {
+    position: relative;
+    top: -30px;
+    left: 300px;
+    font-size: 12px;
+    font-weight: 700;
+    margin: 2px;
+    border-radius: 25px;
+    width: 50px;
+    height: 30px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: #2EE59D;
+    
+}
 

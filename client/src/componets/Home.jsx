@@ -14,6 +14,7 @@ import {
 } from "../redux/actions/index.js";
 import Paginado from './Paginado.jsx';
 import SearchBar from './SearchBar.jsx';
+import LandingPage from './LandingPage.jsx';
 import styles from '../css_modules/Home.module.css';
 import { NavLink as Link } from 'react-router-dom';
 import { IoIosRefresh } from "react-icons/io";
@@ -39,8 +40,11 @@ export default function Home() {
     } else if (data === 'Api') {
         result = videogames.filter(e => typeof (e.id) === "number")
     }
-
-
+    
+    
+    
+    
+    console.log(videogames)
     /* --------- paginado ----------  */
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -151,7 +155,11 @@ export default function Home() {
                     paginado={paginado}
                 />
                 <div>
-                    <CardList games={currentVideogames} />
+                    
+                    {
+                       videogames === "VideoGame not found" ? <LandingPage/> : <CardList games={currentVideogames} />
+                    } 
+                    
                 </div>
             </div>
         </div>

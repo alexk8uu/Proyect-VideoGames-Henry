@@ -44,6 +44,21 @@ export function getVideogames() {
         }
     }
 }
+/* 
+export function getVideogames() {
+    return function (dispatch) {
+        axios.get(URL_VIDEOGAMES)
+        .then(games => {
+            return dispatch({
+                type: GET_ALL_VIDEOGAMES,
+                payload: games.data
+            })
+        }).catch(error => console.log("Error", error))
+    }
+}
+ */
+
+
 
 export function createVideogame(payload) {
     return async function(dispatch) {
@@ -86,6 +101,7 @@ export function getPlataforms() {
         }
     }
 }
+
 
 
 export function getDetailsByID(id) {

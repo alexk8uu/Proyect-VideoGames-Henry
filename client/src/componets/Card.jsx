@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../css_modules/Card.module.css'
 import { NavLink as Link } from 'react-router-dom';
 
-export default function Card({ name, img, genres, id, rating, platforms }) {
+export default function Card({ name, img, genres, id, rating, platforms,price }) {
     return (
         <div className={styles.container}>
             <div className={styles.card}>
@@ -13,6 +13,7 @@ export default function Card({ name, img, genres, id, rating, platforms }) {
                         <h4> {genres} </h4>
                         <p> {platforms}</p>
                         <p> Rating: {rating}</p>
+                        <p>Price: {price}</p>
                         <Link to={`/videogame/${id}`}>
                             <button className={styles.button}>
                                 View Game

@@ -137,7 +137,9 @@ export default function CreateVideogame() {
 
 
     return (
-        <div className={styles.container}>
+
+     
+ <div className={styles.container}>
             <Link to='/home' >
                 <button
                     className={styles.button2}
@@ -256,4 +258,116 @@ export default function CreateVideogame() {
             </form>
         </div>
     )
+      /*  <div className={styles.container}>
+            <div className={styles.title}>
+                <h1>Create your Videogame!</h1>
+            </div>
+                <div className={styles.inputs}>
+                    <div className={styles.box}>
+                        <h1 className={styles.inputDetail}>Name</h1>
+                        <input
+                            id="name"
+                            type="text"
+                            value={input.name}
+                            name="name"
+                            onChange={handleChange}
+                        />
+                        {
+                            errors.name && (
+                                <p className={styles.error}>{errors.name}</p>
+                            )
+                        }
+                    </div>
+                    <div className={styles.box}>
+                        <p className={styles.inputDetail} >Imagen</p>
+                        <input
+                            id="img"
+                            type="text"
+                            name="img"
+                            value={input.img}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className={styles.box}>
+                        <p className={styles.inputDetail}>Released</p>
+                        <input
+                            type="date"
+                            name="released"
+                            value={input.released}
+                            onChange={handleChange}
+                        />
+                        {
+                            errors.released && (
+                                <p className={styles.error}>{errors.released}</p>
+                            )
+                        }
+                    </div>
+                    <div className={styles.box}>
+                        <p className={styles.inputDetail}>Rating</p>
+                        <input
+                            type="number"
+                            name="rating"
+                            value={input.rating}
+                            min="0"
+                            max="5"
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className={styles.box}>
+                        <p className={styles.button_text}>Description</p>
+                        <textarea
+                            id="description"
+                            name="description"
+                            value={input.description}
+                            onChange={handleChange}
+                        />
+                        {
+                            errors.description && (
+                                <p className={styles.error}>{errors.description}</p>
+                            )
+                        }
+                    </div>
+                </div>
+                <div className={styles.genres_box}>
+                    <label className={styles.genres_name}>Genres:</label>
+                    <div className={styles.genres}>
+                        {
+                            genres.map((elem, index) => (
+                                <div key={index} className={styles.genres_checkbox} >
+                                    {elem.name}
+                                    <input
+                                        type="checkbox"
+                                        name={elem.name}
+                                        value={elem.name}
+                                        className={styles.checkbox2}
+                                        onChange={() => handleSelectGenres(index)}
+                                    />
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+                <div className={styles.platforms_box}>
+                    <label className={styles.platforms_name}>Platforms:</label>
+                    <div className={styles.platforms}>
+                        {
+                            platforms.map((elem, index) => (
+                                <div key={index} className={styles.platforms_checkbox}>
+                                    {elem}
+                                    <input
+                                        type="checkbox"
+                                        name={elem}
+                                        value={elem}
+                                        onChange={(e) => handleSelectPlatforms(e, index, elem)}
+                                    />
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+            
+
+        </div>
+
+    ) */
 }

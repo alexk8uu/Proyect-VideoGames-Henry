@@ -80,7 +80,7 @@ async function getGenres(req, res) {
 }
 
 async function addVideogame(req, res) {
-    const { name, description, released, rating, img, genres, platforms } = req.body;
+    const { name, description, released, rating, img, genres, platforms,  } = req.body;
     try {
         const createdVideogame = await Videogame.create({
             name,
@@ -89,6 +89,7 @@ async function addVideogame(req, res) {
             rating,
             img,
             platforms,
+           
         })
         console.log(genres)
         genres.forEach(async genre => {

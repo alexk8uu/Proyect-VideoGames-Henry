@@ -25,6 +25,7 @@ export default function CardDetails() {
     }
     return (
 
+
         <div className={styles.container}>
             <a className={styles.button} onClick={e => handleClick(e)}>x</a>
             <div className={styles.title}>

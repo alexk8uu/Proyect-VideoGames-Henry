@@ -18,7 +18,7 @@ export default function CardList({games}) {
                         rating={e.rating}
                         genres={e.genres.map((elem) => elem.name).join(" / ")}
                         platforms={e.platforms.map((elem) => elem).join(" / ")}
-                        price={e.price}/>
+                        />
                     );
                 } else {
                    return (

@@ -23,13 +23,17 @@
     border-right: 0.5px solid rgba(134, 197, 172, 0.808);
     overflow: hidden;
     animation: animate 4s linear infinite;
-}   
+}
 
 @keyframes animate {
-    0%,10%,100%{
+
+    0%,
+    10%,
+    100% {
         width: 0%;
     }
-    70%{
+
+    70% {
         width: 100%;
     }
 }
@@ -67,7 +71,7 @@ select {
     border-radius: .25em;
     margin: 4px;
     font-size: 15px;
-}   
+}
 
 .btn_create {
     position: relative;
@@ -83,7 +87,7 @@ select {
     outline: none;
     cursor: pointer;
     background: #2EE59D;
-    
+
 }
 
 .btn_database {
@@ -100,7 +104,7 @@ select {
     outline: none;
     cursor: pointer;
     background: #2EE59D;
-   
+
 }
 
 .btn_reload {
@@ -117,6 +121,6 @@ select {
     outline: none;
     cursor: pointer;
     background: #2EE59D;
-    
+
 }
 

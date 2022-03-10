@@ -1,4 +1,4 @@
-import  axios  from 'axios';
+import axios from 'axios';
 export const GET_ALL_VIDEOGAMES = "GET_ALL_VIDEOGAMES";
 export const GET_DETAILS = "GET_DETAILS";
 export const GET_GENRES = "GET_GENRES";
@@ -8,17 +8,17 @@ export const ORDER_BY_RATING = "ORDER_BY_RATING";
 export const ORDER_BY_ALPHA = "ORDER_BY_ALPHA";
 export const FILTER_BY_GENRES = "FILTER_BY_GENRES";
 export const FILTER_BY_ORIGIN = "FILTER_BY_ORIGIN";
-export const URL_VIDEOGAMES = "http://localhost:3001/videogames";
-export const URL_SEARCH_VIDEOGAME = "http://localhost:3001/videogames?name=";
-export const URL_DETAILS = "http://localhost:3001/videogame"
-export const URL_GENRES = "http://localhost:3001/genre"
-export const URL_CREATE_VIDEOGAME = "http://localhost:3001/videogame"
-export const URL_DBGAMES = "http://localhost:3001/db/videogames"
+export const URL_VIDEOGAMES = "/videogames";
+export const URL_SEARCH_VIDEOGAME = "/videogames?name=";
+export const URL_DETAILS = "/videogame"
+export const URL_GENRES = "/genre"
+export const URL_CREATE_VIDEOGAME = "/videogame"
+export const URL_DBGAMES = "/db/videogames"
 export const RESET = "RESET"
 
 
-export function getDbGames () {
-    return async function(dispatch) {
+export function getDbGames() {
+    return async function (dispatch) {
         try {
             const dbgames = await axios.get(URL_DBGAMES)
             return dispatch({
@@ -26,13 +26,13 @@ export function getDbGames () {
                 payload: dbgames.data
             })
         } catch (error) {
-            console.log("Error",error)
+            console.log("Error", error)
         }
     }
 }
 
 export function getVideogames() {
-    return async function(dispatch) {
+    return async function (dispatch) {
         try {
             const games = await axios.get(URL_VIDEOGAMES)
             return dispatch({
@@ -61,39 +61,39 @@ export function getVideogames() {
 
 
 export function createVideogame(payload) {
-    return async function(dispatch) {
+    return async function (dispatch) {
         try {
-            var json = await axios.post(URL_CREATE_VIDEOGAME,payload)
+            var json = await axios.post(URL_CREATE_VIDEOGAME, payload)
             return dispatch({
                 type: CREATED_VIDEOGAME,
                 payload: json.data
             })
         } catch (error) {
-            console.log("Error",error)
+            console.log("Error", error)
         }
     }
 }
 
 export function getGenres() {
-    return async function(dispatch) {
+    return async function (dispatch) {
         try {
             const genres = await axios.get(URL_GENRES)
             return dispatch({
                 type: GET_GENRES,
-                payload: genres.data  
+                payload: genres.data
             })
         } catch (error) {
-            console.log("Error",error)
+            console.log("Error", error)
         }
     }
 }
 
 export function getPlataforms() {
-    return async function(dispatch) {
+    return async function (dispatch) {
         try {
             const json = await axios.get(URL_VIDEOGAMES)
             return dispatch({
-                type : GET_PLATFORMS,
+                type: GET_PLATFORMS,
                 payload: json.data
             })
         } catch (error) {
@@ -105,10 +105,10 @@ export function getPlataforms() {
 
 
 export function getDetailsByID(id) {
-    return async function(dispatch) {
+    return async function (dispatch) {
         try {
             const details = await axios.get(`${URL_DETAILS}/${id}`)
-            return dispatch( {
+            return dispatch({
                 type: GET_DETAILS,
                 payload: details.data
             })
@@ -118,11 +118,11 @@ export function getDetailsByID(id) {
     }
 }
 
-export function searchGameByName (payload) {
-    return async function(dispatch) {
+export function searchGameByName(payload) {
+    return async function (dispatch) {
         try {
             const games = await axios.get(`${URL_SEARCH_VIDEOGAME}${payload}`);
-            return dispatch( {
+            return dispatch({
                 type: URL_SEARCH_VIDEOGAME,
                 payload: games.data
             })
@@ -132,28 +132,28 @@ export function searchGameByName (payload) {
     }
 }
 
-export function orderByRating (payload) {
+export function orderByRating(payload) {
     return {
         type: ORDER_BY_RATING,
         payload
     }
 }
 
-export function orderByAlpha (payload) {
+export function orderByAlpha(payload) {
     return {
         type: ORDER_BY_ALPHA,
         payload
     }
 }
 
-export function filterByGenres (payload) {
+export function filterByGenres(payload) {
     return {
         type: FILTER_BY_GENRES,
         payload
     }
 }
 
-export function filterByOrigen (payload) {
+export function filterByOrigen(payload) {
     return {
         type: FILTER_BY_ORIGIN,
         payload
@@ -162,9 +162,9 @@ export function filterByOrigen (payload) {
 
 export function reset() {
     return {
-      type: RESET,
+        type: RESET,
     };
-  }
+}
 
 /* export function getVideogames() {
     return async function (dispatch) {
@@ -178,7 +178,7 @@ export function reset() {
 /* 
 export function getVideogames() {
     return function (dispatch) {
-      axios.get(`http://localhost:3001/videogames`).then((games) => {
+      axios.get(`/videogames`).then((games) => {
         dispatch({ type: "GET_ALL_VIDEOGAMES", payload: games.data });
       });
     };

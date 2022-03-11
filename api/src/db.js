@@ -11,6 +11,8 @@ https://github.com/timanovsky/subdir-heroku-buildpack
 
 console.log(process.env.PORT) */
 
+
+
 const sequelize = 
   process.env.NODE_ENV === "production" 
   ? new Sequelize({

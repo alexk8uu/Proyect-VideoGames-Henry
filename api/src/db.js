@@ -6,6 +6,9 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST, DB_NAME
 } = process.env;
 
+
+https://github.com/timanovsky/subdir-heroku-buildpack
+
 console.log(process.env.PORT)
 
 const sequelize = 
@@ -25,12 +28,13 @@ const sequelize =
     dialectOptions: {
       ssl: {
         require: true,
+        // Ref.: https://github.com/brianc/node-postgres/issues/2009
         rejectUnauthorized: false,
       },
       keepAlive: true,
     },
     ssl: true,
-  }) 
+  })
 : new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/videogames`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed

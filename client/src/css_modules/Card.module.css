@@ -21,7 +21,7 @@
     margin: 20px;   
     text-align: center;
     transition: all 0.25s;
-    background:rgba(11, 167, 11, 0.187);
+    background:rgba(9, 28, 9, 0.187);
     backdrop-filter: blur(20px);
     color: #fff;
 }

@@ -24,8 +24,8 @@ const { API_KEY } = process.env;
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen( process.env.PORT || 3002, async () => {
-    console.log('%s listening at 3002'); // eslint-disable-line no-console
+  server.listen( process.env.PORT || 3001, async () => {
+    console.log('%s listening at 3001'); // eslint-disable-line no-console
     const getGenreApi = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`);
     getGenreApi.data.results.map(async (genre) => {
       try {

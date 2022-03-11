@@ -6,10 +6,10 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST, DB_NAME
 } = process.env;
 
-
+/* 
 https://github.com/timanovsky/subdir-heroku-buildpack
 
-console.log(process.env.PORT)
+console.log(process.env.PORT) */
 
 const sequelize = 
   process.env.NODE_ENV === "production" 
